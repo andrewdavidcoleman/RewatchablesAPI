@@ -38,9 +38,9 @@ app.get('/', function (req, res) {
 
 // upsert
 app.post('/upsert', function (req, res) {
-  console.log('UPSERT===========================');
+  
   const params = req.query;
-  console.log(params);
+  
   // connect to your database
   sql.connect(config, function (err) {
   
@@ -61,7 +61,7 @@ app.post('/upsert', function (req, res) {
         insert into Rewatchables (name, andrew, caleb) 
         values ('${params.name}', 0, 0)
       `
-      console.log(query)
+      
       // query to the database and get the records
       request.query(query, function (err, recordset) {
           
