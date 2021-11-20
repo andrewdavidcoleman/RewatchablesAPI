@@ -1,12 +1,13 @@
-var express = require('express');
-var cors = require('cors');
-var app = express();
-var sql = require("mssql");
+const express = require('express');
+const cors = require('cors');
+const app = express();
+const sql = require("mssql");
+const port = process.env.PORT || 3000
 
 app.use(cors());
 
 // config for your database
-var config = {
+const config = {
     user: 'andrewdavidcoleman',
     password: 'Container22@@',
     server: 'andrew-dev.database.windows.net', 
@@ -22,7 +23,7 @@ app.get('/', function (req, res) {
         if (err) console.log(err);
 
         // create Request object
-        var request = new sql.Request();
+        const request = new sql.Request();
            
         // query to the database and get the records
         request.query('select * from Rewatchables', function (err, recordset) {
@@ -47,7 +48,7 @@ app.post('/upsert', function (req, res) {
       if (err) console.log(err);
 
       // create Request object
-      var request = new sql.Request();
+      const request = new sql.Request();
 
       const query = params.id ? 
       `
@@ -102,6 +103,6 @@ app.post('/delete', function (req, res) {
   });
 });
 
-var server = app.listen(7000, function () {
-    console.log('Server is running..');
-});
+app.listen(port, () => {
+  console.log(`App listening at http://localhost:${port}`)
+})
