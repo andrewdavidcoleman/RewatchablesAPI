@@ -54,8 +54,8 @@ app.post('/upsert', function (req, res) {
       `
         update Rewatchables set 
         name = '${params.name}',
-        andrew = ${params.andrew},
-        caleb = ${params.caleb}
+        andrew = ${params.andrew ? 1 : 0},
+        caleb = ${params.caleb ? 1 : 0}
         where id = ${params.id}
       ` : 
       `
@@ -67,7 +67,6 @@ app.post('/upsert', function (req, res) {
       request.query(query, function (err, recordset) {
           
         if (err) console.log(err)
-        console.log(recordset);
         // send records as a response
         res.send(recordset);
           
